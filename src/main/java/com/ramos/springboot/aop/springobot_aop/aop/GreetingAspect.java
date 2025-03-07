@@ -12,8 +12,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Order(2)
 @Component
 @Aspect
 public class GreetingAspect {
@@ -54,7 +56,7 @@ public class GreetingAspect {
             logger.info("El metodo " + method + "() con los parametros " + args);
             result = joinPoint.proceed();
             logger.info("El metodo " + method + "() retorna el resultado: " + result);
-            return null;
+            return result;
         } catch (Throwable e) {
             logger.error("Error en la llamda del metodo " + method);
             throw e;
